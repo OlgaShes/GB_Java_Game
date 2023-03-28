@@ -1,10 +1,8 @@
 package org.example.units;
 
-public class Magican extends BaseHero {
-    protected int mana;
+public class Magican extends Healer {
 
-    public Magican(String name, int x, int y) {
-        super("Маг",18, name, x, y, 10, 10, new int[]{7,8});
-        mana = 20;
+    public Magican(int x, int y) {
+        super("Маг",18, x, y, 10, 10, new int[]{7,8}, 20);
     }
 }
