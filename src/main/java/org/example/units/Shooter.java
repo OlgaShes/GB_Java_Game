@@ -1,5 +1,7 @@
 package org.example.units;
 
+import java.util.ArrayList;
+
 public abstract class Shooter extends BaseHero {
     protected int arrows, maxArrows; // запас стрел
     protected int accuracy; // точность
@@ -13,7 +15,12 @@ public abstract class Shooter extends BaseHero {
     }
 
     @Override
-    public void step() {
-        System.out.println("Step of Shooter");
+    public void step(ArrayList<BaseHero> enemyTeam) {
+        if (hp <= 0 || arrows == 0) return;
+        shoot(findClosestEnemy(enemyTeam));
+    }
+
+    protected void shoot(BaseHero enemy) {
+        System.out.println(this.toString() + " Shoot: " + enemy.toString());
     }
 }

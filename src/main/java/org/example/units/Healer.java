@@ -1,5 +1,7 @@
 package org.example.units;
 
+import java.util.ArrayList;
+
 public abstract class Healer extends BaseHero{
     protected int mana, maxMana;
 
@@ -10,7 +12,7 @@ public abstract class Healer extends BaseHero{
     }
 
     @Override
-    public void step() {
+    public void step(ArrayList<BaseHero> enemyTeam) {
         System.out.println("Step of Healer");;
     }
 }
