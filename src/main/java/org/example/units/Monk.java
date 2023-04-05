@@ -2,7 +2,7 @@ package org.example.units;
 
 public class Monk extends Healer{
     public Monk(int x, int y) {
-        super("Монах", 30, x, y, 12, 12, new int[]{9, 12}, 10);
+        super("Монах", 30, x, y, 12, new int[]{9, 12}, 10, 5);
     }
 }
 

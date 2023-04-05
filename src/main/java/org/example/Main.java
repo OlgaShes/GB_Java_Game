@@ -2,26 +2,42 @@ package org.example;
 
 import org.example.units.*;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         ArrayList<BaseHero> team1 = createTeam(true);
         ArrayList<BaseHero> team2 = createTeam(false);
-
+        System.out.println("Команда 1:");
         team1.forEach(h -> System.out.println(h));
-        team1.forEach(h -> System.out.println(h.getInfo()));
-
+        System.out.println("Команда 2:");
         team2.forEach(h -> System.out.println(h));
-        team2.forEach(h -> System.out.println(h.getInfo()));
 
-        for (BaseHero h : team1) {
-            if (h instanceof Arbalester) h.step(team2);
+        System.out.println("Старт игры");
+        ArrayList<BaseHero> allTeams = new ArrayList<>();
+        allTeams.addAll(team1);
+        allTeams.addAll(team2);
+        Collections.sort(allTeams);
+        allTeams.forEach(h -> System.out.println(h));
+
+        String step = "";
+        int index = 0;
+        while (!step.equals("q")) {
+            System.out.println("======== Ход " + (++index)+ " ========");
+            for (BaseHero h: allTeams) {
+                if (team1.contains(h)) h.step(team2, team1);
+                else h.step(team1, team2);
+            }
+            System.out.println("======== Результат хода ========");
+            System.out.println("Команда 1:");
+            team1.forEach(h -> System.out.println(h));
+            System.out.println("Команда 2:");
+            team2.forEach(h -> System.out.println(h));
+            Collections.sort(allTeams);
+            step = scanner.nextLine();
         }
-        for (BaseHero h : team2) {
-            if (h instanceof Sniper) h.step(team1);
-        }
+
     }
 
     public static ArrayList<BaseHero> createTeam(boolean firstTeam) {
@@ -29,33 +45,19 @@ public class Main {
         if (firstTeam) {
             for (int i = 0; i < 10; i++) {
                 switch (new Random().nextInt(4)) {
-                    case 0:
-                        team.add(new Arbalester(0, i));
-                        break;
-                    case 1:
-                        team.add(new Magican(0, i));
-                        break;
-                    case 2:
-                        team.add(new Peasant(0, i));
-                        break;
-                    default:
-                        team.add(new Thief(0, i));
+                    case 0 -> team.add(new Arbalester(0, i));
+                    case 1 -> team.add(new Magican(0, i));
+                    case 2 -> team.add(new Peasant(0, i));
+                    default -> team.add(new Thief(0, i));
                 }
             }
         } else {
             for (int i = 0; i < 10; i++) {
                 switch (new Random().nextInt(4)) {
-                    case 0:
-                        team.add(new Monk(9, i));
-                        break;
-                    case 1:
-                        team.add(new Peasant(9, i));
-                        break;
-                    case 2:
-                        team.add(new Sniper(9, i));
-                        break;
-                    default:
-                        team.add(new Pikeman(9, i));
+                    case 0 -> team.add(new Monk(9, i));
+                    case 1 -> team.add(new Peasant(9, i));
+                    case 2 -> team.add(new Sniper(9, i));
+                    default -> team.add(new Pikeman(9, i));
                 }
             }
         }

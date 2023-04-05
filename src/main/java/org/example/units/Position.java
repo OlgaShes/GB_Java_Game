@@ -2,13 +2,27 @@ package org.example.units;
 
 public class Position {
     protected int x, y;
+    protected double maxDistance = Math.sqrt(Math.pow(9, 2) + Math.pow(9, 2));
+    protected double minDistance = 1;
 
-    public Position(int x, int y) {
+    protected Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public double distance(BaseHero target) {
+    protected double distance(BaseHero target) {
         return Math.sqrt(Math.pow(target.position.x - x, 2) + Math.pow(target.position.y - y, 2));
     }
+//     коэффициент дистанции, максимум - диагональ,
+    protected double closenessCoefficient(BaseHero target) {
+//        max distance = 12,73 --> 55% силы, min distance 1 --> 100% силы
+
+        if (distance(target) <= ((maxDistance-minDistance)/4) + minDistance) return 1;
+        else if (distance(target) > ((maxDistance-minDistance)/4) + minDistance &&
+                distance(target) <= ((maxDistance-minDistance)/2) + minDistance ) return 0.85;
+        else if (distance(target) > ((maxDistance-minDistance)/2) + minDistance &&
+                distance(target) <= ((maxDistance-minDistance)*3/4) + minDistance) return 0.7;
+        return 0.55;
+    }
+
 }
