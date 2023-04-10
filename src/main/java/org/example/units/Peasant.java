@@ -6,7 +6,7 @@ public class Peasant extends BaseHero{
 //    protected int burden; // остаток подносимых боеприпасов
 
     public Peasant(int x, int y) {
-        super("Крестьянин",5, x, y, 5, new int[]{1,1}, 1);
+        super("Оруженосец",5, x, y, 5, new int[]{1,1}, 1);
 //        burden = 25;
     }
 

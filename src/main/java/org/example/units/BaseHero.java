@@ -8,7 +8,7 @@ import java.util.Random;
 public abstract class BaseHero implements GameInterface, Comparable<BaseHero> {
     protected String name;
     protected String className;
-    protected float hp, maxHp; // текущее здоровье, максимльное здоровье
+    protected double hp, maxHp; // текущее здоровье, максимльное здоровье
     protected int def; // защита - индивидуальный процент уменьшения урона
     protected int[] damage; // урон
     protected Position position;
@@ -35,8 +35,11 @@ public abstract class BaseHero implements GameInterface, Comparable<BaseHero> {
 
     @Override
     public String toString() {
-        return className + ' ' + name + ", запас здоровья: "
-                + hp + ", координаты: [" + position.x + ":" + position.y + "] " + state;
+        String info = className + ' ' + name;
+        if (state == State.dead) info += ", \u2620";
+        else info += ", \u263a";
+        info += ", \u2665: "+ (Math.round(hp * 100) / 100.00);
+        return info;
     }
 
     //    заглушка, чтобы пока не прописывать в классах:
@@ -76,6 +79,13 @@ public abstract class BaseHero implements GameInterface, Comparable<BaseHero> {
 
     protected void setState(State newState) {
         this.state = newState;
+    }
+    public int[] getCoords() {
+        return new int[]{position.x, position.y};
+    }
+
+    public double getHp() {
+        return hp;
     }
 
     @Override

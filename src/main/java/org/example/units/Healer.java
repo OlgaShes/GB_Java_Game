@@ -13,6 +13,6 @@ public abstract class Healer extends BaseHero{
 
     @Override
     public void step(ArrayList<BaseHero> enemyTeam, ArrayList<BaseHero> myTeam) {
-        System.out.println("Step of Healer");
+//        System.out.println("Step of Healer");
     }
 }

@@ -20,19 +20,17 @@ public abstract class Shooter extends BaseHero {
         if (enemy == null) return;
         shoot(findClosestEnemy(enemyTeam));
         if (!checkPeasant(myTeam)) arrows--;
-//        System.out.println("    now: " + name  + " стрел: "  + arrows);
     }
 
     protected void shoot(BaseHero enemy) {
         double hit = countDamage(enemy);
         if (enemy.state != State.dead) {
             enemy.getDamage(hit);
-//            System.out.println("    " + name + " Shoot: " + hit + " --> " + enemy);
         }
     }
     private Boolean checkPeasant(ArrayList<BaseHero> myTeam) {
         for (BaseHero h: myTeam) {
-            if (h.getInfo().equals("Крестьянин") && h.state == State.stand) {
+            if (h.getInfo().equals("Оруженосец") && h.state == State.stand) {
                 h.setState(State.busy);
                 return true;
             }
@@ -42,9 +40,13 @@ public abstract class Shooter extends BaseHero {
 
     private double countDamage(BaseHero enemy) {
 //        случайная сила удара * аккуратность * коэффициент дальности
-//        System.out.println(position.closenessCoefficient(enemy));
         return (Math.random()*(damage[1] - damage[0]) + damage[0])
                 * accuracy / 100
                 * position.closenessCoefficient(enemy);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", \u27B6: " + arrows;
     }
 }
