@@ -10,7 +10,7 @@ public abstract class BaseHero implements GameInterface, Comparable<BaseHero> {
     protected String className;
     protected double hp, maxHp; // текущее здоровье, максимльное здоровье
     protected int def; // защита - индивидуальный процент уменьшения урона
-    protected int[] damage; // урон
+    protected int[] force; // урон
     protected Position position;
     protected int priority;
 
@@ -18,12 +18,12 @@ public abstract class BaseHero implements GameInterface, Comparable<BaseHero> {
 
     protected State state;
 
-    public BaseHero(String className, float hp, int x, int y, int def, int[] damage, int priority) {
+    public BaseHero(String className, float hp, int x, int y, int def, int[] force, int priority) {
         this.className = className;
         this.hp = this.maxHp = hp;
         this.name = getName();
         this.def = def;
-        this.damage = damage;
+        this.force = force;
         position = new Position(x, y);
         this.priority = priority;
         state = State.stand;
@@ -43,9 +43,9 @@ public abstract class BaseHero implements GameInterface, Comparable<BaseHero> {
     }
 
     //    заглушка, чтобы пока не прописывать в классах:
-    @Override
-    public void step(ArrayList<BaseHero> enemyTeam, ArrayList<BaseHero> myTeam) {
-    }
+//    @Override
+//    public void step(ArrayList<BaseHero> enemyTeam, ArrayList<BaseHero> myTeam) {
+//    }
 
     @Override
     public String getInfo() {
@@ -80,6 +80,7 @@ public abstract class BaseHero implements GameInterface, Comparable<BaseHero> {
     protected void setState(State newState) {
         this.state = newState;
     }
+
     public int[] getCoords() {
         return new int[]{position.x, position.y};
     }
