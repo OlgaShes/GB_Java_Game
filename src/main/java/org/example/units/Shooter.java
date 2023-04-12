@@ -40,7 +40,7 @@ public abstract class Shooter extends BaseHero {
 
     private double countDamage(BaseHero enemy) {
 //        случайная сила удара * аккуратность * коэффициент дальности
-        return (Math.random()*(damage[1] - damage[0]) + damage[0])
+        return (Math.random()*(force[1] - force[0]) + force[0])
                 * accuracy / 100
                 * position.closenessCoefficient(enemy);
     }

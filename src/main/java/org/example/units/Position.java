@@ -25,4 +25,8 @@ public class Position {
         return 0.55;
     }
 
+    protected int[] enemyDirection(BaseHero target) {
+        return new int[] {target.position.x - this.x, target.position.y - this.y};
+    }
+
 }
